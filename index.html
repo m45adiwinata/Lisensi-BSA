@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lisensi BSA</title>
+    <link rel="stylesheet" href="tooltip.css">
+</head>
+<body>
+    <input type="text" id="kode">
+    <button id="encrypt">test</button>
+    <br>
+
+    <input type="text" id="md5">
+    <div class="tooltip">
+        <button id="copyBtn">
+            <span class="tooltiptext" id="myTooltip">Copy to clipboard</span>copy
+        </button>
+    </div>
+
+    <script src="md5.js"></script>
+    <script>
+        let kode = document.querySelector('#kode');
+        const btn = document.querySelector('#encrypt');
+        let hasil = document.querySelector('#md5');
+        const copy = document.querySelector('#copyBtn');
+        btn.onclick = (event) => {
+            event.preventDefault();
+            hasil.value = md5(kode.value).substr(2,4).toUpperCase();
+        }
+        copy.onclick = (event) => {
+            event.preventDefault();
+            hasil.select();
+            hasil.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(hasil.value);
+            let tooltip = document.getElementById("myTooltip");
+            tooltip.innerHTML = "Copied to clipboard!";
+        }
+        copy.onmouseout = () => {
+            let tooltip = document.getElementById("myTooltip");
+            tooltip.innerHTML = "Copy to clipboard";
+        }
+    </script>
+</body>
+</html>
